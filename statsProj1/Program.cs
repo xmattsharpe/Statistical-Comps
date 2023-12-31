@@ -18,6 +18,7 @@ namespace statsProj1
             int[] stats = GrabScores();
             FindMean(stats);
             stanDeviation(stats);
+            calc_Variance(stats);
 
             ask_User();
 
@@ -88,7 +89,7 @@ namespace statsProj1
         {
             // population standard deviation
             double mean = 0;
-            int sum = 0;
+            double sum = 0;
             double root = 0;
             double difference = 0;
 
@@ -120,9 +121,50 @@ namespace statsProj1
             double differences_dividedByn = root / length;
             double sigma = Math.Sqrt(differences_dividedByn);
 
-            Console.WriteLine($"Sigma is {sigma}");
+            Console.WriteLine($"Sigma is: {sigma}");
             return sigma;
         }
+
+       
+        public static double? calc_Variance(int[] Sample)
+        {
+            // fix this later using a helper function.....
+            double mean = 0;
+            double sum = 0;
+            double root = 0;
+            double difference = 0;
+
+            // base case 
+            int length = Sample.Length;
+            if (length == 0)
+            {
+                return null;
+            }
+
+            else
+            {
+
+                for (int j = 0; j < length; j++)
+                {
+                    sum += Sample[j];
+
+                }
+
+                mean = sum / length;
+            }
+
+            for (int i = 0; i < length; i++)
+            {
+                difference = Sample[i] - mean;
+                root += Math.Pow(difference, 2);
+            }
+
+            double differences_dividedByn = root / length;
+
+            Console.WriteLine($"The variance is: {differences_dividedByn}");
+            return differences_dividedByn;
+        }
+
 
         public static double linRegression_Slope(int[] x_vals, int[] y_vals)
         {
